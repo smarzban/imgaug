@@ -1235,7 +1235,7 @@ class KeypointsOnImage(object):
 
 # TODO functions: square(), to_aspect_ratio(), extend()/add_border(), contains_point()
 class BoundingBox(object):
-    def __init__(self, x1, y1, x2, y2):
+    def __init__(self, x1, y1, x2, y2,logo=''):
         if x1 > x2:
             x2, x1 = x1, x2
         do_assert(x2 > x1)
@@ -1247,6 +1247,7 @@ class BoundingBox(object):
         self.y1 = y1
         self.x2 = x2
         self.y2 = y2
+        self.logo = logo
 
     @property
     def x1_int(self):
@@ -1515,12 +1516,13 @@ class BoundingBox(object):
             Keypoint(x=self.x1, y=self.y2)
         ]
 
-    def copy(self, x1=None, y1=None, x2=None, y2=None):
+    def copy(self, x1=None, y1=None, x2=None, y2=None, logo=None):
         return BoundingBox(
             x1=self.x1 if x1 is None else x1,
             x2=self.x2 if x2 is None else x2,
             y1=self.y1 if y1 is None else y1,
-            y2=self.y2 if y2 is None else y2
+            y2=self.y2 if y2 is None else y2,
+            logo=self.logo if logo is None else logo
         )
 
 class BoundingBoxesOnImage(object):
